@@ -1,35 +1,57 @@
 {% block style %}
     <style>
         .hobby {
+            background-color:rgb(var(--color-primary-darker));
+            padding: 80px;
 
         }
 
-        .hobby-element{
+        .hobby-element{  
+            max-width: 1024px;
+            display: grid;
+            grid-template-columns: 60% auto;
+            grid-gap: 30px;
 
         }
         .hobby-cards{
+            display: grid;
+            grid-gap: 30px;
+            width: 100%;
+            grid-template-columns: repeat( 2, 50%);
+
+
 
         }
 
         .hobby-text {
+            width: auto;
+            padding: 32px;
 
         }
 
         @media screen and (max-width: 1020px) {
             .hobby-element {
+                display: flex;
+                flex-direction: column;
+               
+                
 
             }
         }
 
         @media screen and (max-width: 650px){
             .hobby {
+                min-height: max-content !important;
+                padding: 16px;
 
             }
             .hobby-cards {
+                grid-template-column: repeat(1, 100%);
 
             }
 
             .hobby-text {
+                padding: 0, 16px;
 
             }
         }
@@ -38,9 +60,18 @@
 
 {% block body %}
     {% set hobbies = [
-        {'headline': '',
-        'content': '',
-        'icon': ''},
+        {'headline': 'Freizeit',
+        'content': 'In meiner Freizeit verbringe ich viel Zeit draußen, da ich jeden Tag ins Fitnessstudio oder laufen gehe. Zudem hängt mir Freunde zu Treffen am Herzen.',
+        'icon': 'svg/Freetime.svg'},
+        {'headline': 'Hobbys',
+        'content': 'Ich spiele und gucke sehr gerne Sport. Sei es Fußball, Handball, etc. Zudem rüste ich stets meinen Pc auf und verbringe somit viel am Pc und schraube.',
+        'icon': 'svg/Hobby.svg'},
+        {'headline': 'Reisen',
+        'content': 'Da ich es liebe zu reisen, lerne ich viele Sprachen um mich vor Ort besser verständigen zu können.',
+        'icon': 'svg/Reisen.svg'},
+        {'headline': 'Programmieren',
+        'content': 'In der Schule, sowie auch in meiner Freizeit, programmiere ich mit meinen Freunden und setze mich mit 3D-Druckern auseinander.',
+        'icon': 'svg/3D-Drucker.svg'},
 
     ] %}
 
@@ -50,6 +81,11 @@
                 {% for item in hobbies %}
                     {% include 'components/card.html.twig' with item %}
                 {% endfor %}
+            </span>
+            <span class="hobby-text">
+                <h2> Interessen</h2>
+                <p class="light-color-primary-normal"><br/><br/>Ich heiße Keno Wannke. Ich bin 15 Jahre alt und besuche derzeit das Evangelische Gymnasium in Werther.<br/> <br/>Ich interessiere mich für den Sport, vor allem für Fußball, und für Technik. Im spezifischen PC-Konfiguration. Zudem liebe ich es zu reisen.<br/><br/>In der Schule belege ich die Leistungskurse Englisch und Physik. Zudem belege ich die Grundkurse Informatik und Spanisch, welche mir viel Freude bereiten.
+                </p>
             </span>
         </div>
     </section>

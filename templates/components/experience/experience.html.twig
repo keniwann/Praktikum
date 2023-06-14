@@ -26,14 +26,20 @@
 {% block body %}
 
         {% set experiences = [
-            {'headline': '',
-            'content': '',
-            'link': '',
-            'linkText': 'T',
-            'img': ''},
+            {'headline': 'Entwicklung eines Miniautos',
+            'content': ' 2020 haben ein Freund und Ich ein solarangetriebens Mini-auto entwickelt und mit diesem Miniauto bei dem Wettbewerb Jugend forscht teilgenommen. Dabei haben wir den Umweltspreis von Jugend forscht gewonnen. Der Preis hier waren 50$. Das Auto wurde durch ein Solarpanel, welches auf dem Dach des Autos angebracht wurde, nach vorne bewegt.',
+            'link': 'https://www.haller-kreisblatt.de/microsites/fotostrecken/fotostrecken/22699476_Fotogalerie-Jugend-forscht-und-Schueler-experimentieren.html',
+            'linkText': 'Zum Artikel des Haller Kreisblatts',
+            'img': 'img/Miniauto.jpeg'},
+            {'headline':'Praktikum IT-Branche',
+                'content': '2023 absolvierte ich ein Praktikum bei der HDNET GmbH & Co. KG, welche Spezialisten für Digital- und Portallösungen sind. Bei diesem Praktikum durfte ich in den Alltag eines Front- und Backend Entwickler hineinblicken und selber programieren. Zudem habe ich durch das Praktikum viele neue Erfahrungen und Erkenntnisse im Bereich IT gesammelt.',
+                'link': 'https://www.hdnet.de',
+                'linkText': 'Zur Website von HDNET',
+                'img': 'img/code.png'}
 
         ] %}
     <section id="experience" class="experience">
+        <h2 class="text-uppercase">Erfahrungen</h2>
         <div class="experience-element">
             {% for item in experiences %}
                 {% include 'components/experience/experience-content.html.twig' %}

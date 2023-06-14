@@ -9,7 +9,7 @@
             grid-gap: 32px;
             margin-bottom: 32px;
         }
-        .c-ExpertiseItem .c-ExpertiseItem__progressBarContainer .c-ProgressBar__percentage > h3{
+        .c-ExpertiseItem .c-ExpertiseItem__progressBarContainer .c-ProgressBar__percentage > h3{ 
             margin-bottom: 0px;
             margin-top: -8px;
         }
@@ -35,7 +35,9 @@
                 <div class="c-ProgressBar__top js-ProgressBarTop" data-percentage="{{ expertise.percentage }}"></div>
             </div>
             <div class="c-ProgressBar__percentage">
+               <h3 class="bold"> {{ expertise.percentage }}%</h3>
             </div>
         </div>
+        <h3 class="color-primary-normal">{{expertise.headline}} </h3>
     </div>
 {% endblock %}
