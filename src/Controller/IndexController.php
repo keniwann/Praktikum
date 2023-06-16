@@ -133,7 +133,7 @@ class IndexController extends AbstractController
                 $this->addFlash('contact-success', 'Ihre Nachricht wurde erfolgreich verschickt!');
             } catch (\Exception $e) {
                 // add flash message to notice the user that something went wrong
-                $this->addFlash('contact-danger', 'Ihre Nachricht konnte leider nicht verschickt werden!'  );
+                $this->addFlash('contact-danger', 'Ihre Nachricht konnte leider nicht verschickt werden! Biite wenden Sie sich dann an die E-Mail die am linken Rand steht!'  );
 
                 // render template
                 return $this->renderForm('landingpage/index.html.twig', [
