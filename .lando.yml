@@ -3,3 +3,10 @@ recipe: lamp
 config:
   webroot: public
   php: 7.4
+services:
+  myservice:
+    type: mailhog:v1.0.0
+    ssl: true
+    portforward: false
+    hogfrom:
+      - appserver

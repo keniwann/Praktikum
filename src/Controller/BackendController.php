@@ -43,6 +43,14 @@ class BackendController extends AbstractController
      */
     public function index() {
         // render template
+    return $this->render('/backend/index.html.twig',   [
+        'user' => $this->getUser(),
+        'generatedLink' => ''
+    ]);
+    
+        
+     
+    }
         /*
          * Hier soll wieder ein Template mit Daten gerendert werden.
          * Template Name: /backend/index.html.twig
@@ -50,7 +58,7 @@ class BackendController extends AbstractController
          *  - Der aktuelle User ('user') --> hier kannst du die Funktion 'getUser' verwenden welche von dieser Klasse bereitgestellt wird
          *  - 'generatedLink' --> aktuell noch ein leerer String
          */
-    }
+    
 
     /**
      * @Route("/generateLink", name="generateLink")
@@ -60,6 +68,7 @@ class BackendController extends AbstractController
     public function generateLink(Request $request, QueryService $queryService, Filesystem $filesystem, HashService $hashService) {
 
         // get params from request
+        $params =$queryService->getQueryParameter($request);
         /*
          * Die Informationen, welche wir zum Generieren des Links brauchen, befinden sich ebenfalls in dem request.
          * Verwende den QueryService und die Funktion 'getQueryParameter', um die benötigten Daten aus dem Parameter
@@ -73,6 +82,7 @@ class BackendController extends AbstractController
 
         // build hash
         $currentTime = time();
+        $hash=$hashService->generateHash($currentTime, $params ['recipient']);
         /*
          * Die Hash Generierung:
          * Mithilfe des 'hashService' und der Funktion 'generateHash' kannst du dir einen Hash generieren lassen.
@@ -83,6 +93,8 @@ class BackendController extends AbstractController
         $filesystem->touch(self::HASH_FILES_BASE_URL . '/' . $hash . '.txt');
 
         // build data for File
+        $dayMultiplier = 60*60*24;
+        $expireTime = $currentTime + $dayMultiplier * $params['expiresInDays'];
         /*
          * Erstelle eine Variable mit dem Namen 'dayMultiplier'. Diese soll einen ganzzahligen Wert enthalten. Dieser
          * Wert ist die Anzahl an Sekunden, die ein Tag besitzt.
@@ -168,7 +180,9 @@ class BackendController extends AbstractController
      */
     public function removeUploadedCV(Filesystem $filesystem): Response
     {
+
         //  build the filename
+        $filename= IndexController::CV_ASSET_DIR .  DIRECTORY_SEPARATOR  . IndexController::CV_ASSET_FILENAME;
         /*
          * Da wir den Dateinamen des hochgeladenen Dokumentes mehrfach verwenden, bauen wir uns ihn einmal zusammen.
          * Dazu gibt es in der Klasse IndexController eine Konstante, die 'CV_ASSET_DIR' heist. In dieser Konstante ist
@@ -180,6 +194,9 @@ class BackendController extends AbstractController
          * Verbinde diese drei Konstanten miteinander und speichere sie in eine Variable ('filename')
          */
         // check if file with filename exists
+        if($filesystem->exists($filename)){
+            $filesystem->remove($filename);
+        }
         /*
          * Der Service Filesystem spiegelt unser Dateisystem auf dem Rechner/ Server wider. Mithilfe des Filesystems
          * können wir überprüfen, ob die Datei überhaupt existiert. Dazu verwende die Funktion 'exist' der du den
